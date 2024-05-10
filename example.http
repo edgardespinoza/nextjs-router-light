@@ -1,0 +1,29 @@
+POST http://localhost:3000/api/room
+
+{
+    "name": "100"
+}
+
+###
+
+GET http://localhost:3000/api/room
+
+
+###
+
+DELETE http://localhost:3000/api/room/f88c7434-96c7-47b0-9475-a46519484a51
+
+
+###
+GET http://localhost:3000/api/reading?month=1&year=2024
+
+###
+POST http://localhost:3000/api/reading
+
+{
+    "roomId": "37ad2b92-93dc-4519-a0c1-f9c8a02f20aa",
+    "value": 101.1,
+    "year": 2024,
+    "month": 1
+}
+
