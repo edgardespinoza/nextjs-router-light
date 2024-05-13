@@ -6,7 +6,7 @@ POST http://localhost:3000/api/room
 
 ###
 
-GET http://localhost:3000/api/room
+GET https://nextjs-router-light.vercel.app/api/room
 
 
 ###
@@ -15,14 +15,14 @@ DELETE http://localhost:3000/api/room/f88c7434-96c7-47b0-9475-a46519484a51
 
 
 ###
-GET http://localhost:3000/api/reading?month=1&year=2024
+GET https://nextjs-router-light.vercel.app/api/reading?month=1&year=2024
 
 ###
-POST http://localhost:3000/api/reading
+POST https://nextjs-router-light.vercel.app/api/reading
 
 {
     "roomId": "37ad2b92-93dc-4519-a0c1-f9c8a02f20aa",
-    "value": 101.1,
+    "value": 102.1,
     "year": 2024,
     "month": 1
 }
