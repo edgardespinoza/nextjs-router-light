@@ -36,7 +36,8 @@ npx prisma db push
 - To choose default, slate and yes
 
 ```js
-npx shadcn-ui@latest init      
+npx shadcn-ui@latest init
 ```
 
-- Go to ` https://ui.shadcn.com/docs/installation/next `
+- Go to `https://ui.shadcn.com/docs/installation/next`
+  use Vercel to deploy `https://vercel.com/`

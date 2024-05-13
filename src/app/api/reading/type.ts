@@ -23,6 +23,9 @@ export const readingDtoFromReading = ({
     value: value,
     year: year,
     month: month,
-    room: room,
+    room: {
+      id: room.id,
+      name: room.name,
+    },
   };
 };
