@@ -31,8 +31,7 @@ export async function POST(request: Request) {
     },
   });
 
-  console.log(reading);
-
+  
   if (reading === null) {
     reading = await db.reading.create({
       data: {

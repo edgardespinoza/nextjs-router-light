@@ -15,15 +15,28 @@ DELETE http://localhost:3000/api/room/f88c7434-96c7-47b0-9475-a46519484a51
 
 
 ###
-GET https://nextjs-router-light.vercel.app/api/reading?month=1&year=2024
+GET https://nextjs-router-light.vercel.app/api/reading?month=5&year=2024
 
 ###
 POST https://nextjs-router-light.vercel.app/api/reading
 
 {
-    "roomId": "37ad2b92-93dc-4519-a0c1-f9c8a02f20aa",
-    "value": 102.1,
+    "roomId": "6a156238-b875-4ca6-9a57-c39d7d2b3e9e",
+    "value": 600.8,
     "year": 2024,
     "month": 1
 }
 
+###
+DELETE http://localhost:3000/api/reading/be919445-6163-4b24-b60b-28c6f29b30aa
+
+###
+
+PUT http://localhost:3000/api/reading/e15f10e2-e8c7-41ed-b979-ae99055942e4
+
+{
+    "roomId": "6a156238-b875-4ca6-9a57-c39d7d2b3e9e",
+    "value": 600.8,
+    "year": 2024,
+    "month": 1
+}

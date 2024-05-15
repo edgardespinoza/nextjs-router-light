@@ -14,7 +14,7 @@ export async function DELETE(
     return NextResponse.json(
       {},
       {
-        status: 400,
+        status: 404,
       }
     );
   }
