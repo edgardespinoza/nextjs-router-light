@@ -1,6 +1,6 @@
 export type ReadingDto = {
   id: string;
-  value: number;
+  measure: number;
   year: number;
   month: number;
   room: {
@@ -11,20 +11,20 @@ export type ReadingDto = {
 
 export const readingDtoFromReading = ({
   id,
-  value,
+  measure,
   year,
   month,
   room,
 }: {
   id: string;
-  value: number;
+  measure: number;
   year: number;
   month: number;
   room: { name: string; id: string };
 }): ReadingDto => {
   return {
     id: id,
-    value: value,
+    measure: measure,
     year: year,
     month: month,
     room: {

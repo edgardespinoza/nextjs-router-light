@@ -31,7 +31,7 @@ model Room {
 
 model Reading {
   id        String   @id @default(uuid())
-  value     Float
+  measure   Float
   month     Int
   year      Int
   createdAt DateTime @default(now())

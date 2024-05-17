@@ -5,7 +5,7 @@ import { readingDtoFromReading } from "./type";
 
 const readingSchema = z.object({
   roomId: z.string().uuid(),
-  value: z.number().gte(0),
+  measure: z.number().gte(0),
   month: z.number().gte(0).lte(13),
   year: z.number().gte(2000),
 });
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
   if (reading === null) {
     reading = await db.reading.create({
       data: {
-        value: data.value,
+        measure: data.measure,
         month: data.month,
         roomId: data.roomId,
         year: data.year,
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
         id: reading.id,
       },
       data: {
-        value: data.value,
+        measure: data.measure,
       },
     });
   }
