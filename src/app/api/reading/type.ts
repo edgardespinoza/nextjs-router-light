@@ -9,7 +9,7 @@ export type ReadingDto = {
   };
 };
 
-export const readingDtoFromReading = ({
+export const toReadingDto = ({
   id,
   measure,
   year,

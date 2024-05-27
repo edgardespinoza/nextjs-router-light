@@ -1,7 +1,8 @@
+import { getReading } from "@/app/service/reading/getReading";
 import db from "@/db/db";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { readingDtoFromReading } from "./type";
+import { toReadingDto } from "./type";
 
 const readingSchema = z.object({
   roomId: z.string().uuid(),
@@ -31,7 +32,6 @@ export async function POST(request: Request) {
     },
   });
 
-  
   if (reading === null) {
     reading = await db.reading.create({
       data: {
@@ -72,17 +72,9 @@ export const GET = async (request: NextRequest) => {
     );
   }
 
-  const reading = await db.reading.findMany({
-    where: {
-      month: Number(month),
-      year: Number(year),
-    },
-    include: {
-      room: true,
-    },
-  });
+  const reading = await getReading(Number(month), Number(year));
 
-  const readingDto = reading.map(readingDtoFromReading);
+  const readingDto = reading.map(toReadingDto);
 
   return NextResponse.json(readingDto);
 };
