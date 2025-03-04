@@ -17,6 +17,6 @@ export const toReadingsDto = (
     },
     meterWaterBefore: previous?.meterLight ?? 0,
     meterLightBefore: previous?.meterWater ?? 0,
-    rent: previous?.rent ?? 0,
+    rent: previous?.rent ?? actual.rent,
   };
 };

@@ -36,7 +36,7 @@ export const toReadingDto = (
     meterLightCurrent: current.meterWater,
     meterLightBefore: previous?.meterLight ?? 0,
     meterWaterBefore: previous?.meterWater ?? 0,
-    rent: previous?.rent ?? 0,
+    rent: previous?.rent ?? current.rent,
     year: current.year,
     month: current.month,
     room: {

@@ -16,7 +16,7 @@ DELETE https://nextjs-router-light.vercel.app/api/room/b4339b8a-9bde-405b-a3f9-8
 
 
 ### readings
-GET https://nextjs-router-light.vercel.app/api/reading?month=6&year=2024
+GET https://nextjs-router-light.vercel.app/api/readings?month=6&year=2024
 
 ### 
 GET https://nextjs-router-light.vercel.app/api/reading/0a6cd673-b610-41e7-bcfb-5bda80f4e785
@@ -26,11 +26,11 @@ POST https://nextjs-router-light.vercel.app/api/reading
 
 {
     "roomId": "d8b70f92-df03-4335-b306-77c084504d2d",
-    "meterWater": 300.8,
-    "meterLight": 400.8,
+    "meterWater": 100.8,
+    "meterLight": 200.8,
     "rent": 300,
     "year": 2024,
-    "month": 6
+    "month": 5
 }
 
 ###
