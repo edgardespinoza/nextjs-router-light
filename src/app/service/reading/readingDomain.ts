@@ -1,36 +1,43 @@
 export type ReadingDomain = {
+  id: string;
+  meterWater: number;
+  meterLight: number;
+  rent: number;
+  year: number;
+  month: number;
+  room: {
+    name: string;
     id: string;
-    measure: number;
-    year: number;
-    month: number;
+  };
+};
+
+export const toReading = ({
+  id,
+  meterWater,
+  meterLight,
+  rent,
+  year,
+  month,
+  room,
+}: {
+  id: string;
+  meterWater: number;
+  meterLight: number;
+  rent: number;
+  year: number;
+  month: number;
+  room: { name: string; id: string };
+}): ReadingDomain => {
+  return {
+    id: id,
+    meterWater: meterWater,
+    meterLight: meterLight,
+    rent: rent,
+    year: year,
+    month: month,
     room: {
-      name: string;
-      id: string;
-    };
+      id: room.id,
+      name: room.name,
+    },
   };
-  
-  export const toReading = ({
-    id,
-    measure,
-    year,
-    month,
-    room,
-  }: {
-    id: string;
-    measure: number;
-    year: number;
-    month: number;
-    room: { name: string; id: string };
-  }): ReadingDomain => {
-    return {
-      id: id,
-      measure: measure,
-      year: year,
-      month: month,
-      room: {
-        id: room.id,
-        name: room.name,
-      },
-    };
-  };
-  
+};

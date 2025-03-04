@@ -2,7 +2,9 @@ import { ReadingDomain } from "@/app/service/reading/readingDomain";
 import { ReadingDto } from "../reading/type";
 
 export type ReadingsDto = ReadingDto & {
-  measurePrevious: number;
+  meterLightPrevious: number;
+  meterWaterPrevious: number;
+  rentPrevious: number;
 };
 
 export const toReadingsDto = (
@@ -11,13 +13,17 @@ export const toReadingsDto = (
 ): ReadingsDto => {
   return {
     id: actual.id,
-    measure: actual.measure,
+    meterLight: actual.meterLight,
+    meterWater: actual.meterWater,
+    rent: actual.rent,
     year: actual.year,
     month: actual.month,
     room: {
       id: actual.room.id,
       name: actual.room.name,
     },
-    measurePrevious: previous?.measure ?? 0,
+    meterLightPrevious: previous?.meterLight ?? 0,
+    meterWaterPrevious: previous?.meterWater ?? 0,
+    rentPrevious: previous?.rent ?? 0,
   };
 };

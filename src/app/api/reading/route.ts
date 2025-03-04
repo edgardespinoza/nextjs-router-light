@@ -6,7 +6,9 @@ import { toReadingDto } from "./type";
 
 const readingSchema = z.object({
   roomId: z.string().uuid(),
-  measure: z.number().gte(0),
+  meterWater: z.number().gte(0),
+  meterLight: z.number().gte(0),
+  rent: z.number().gte(0),
   month: z.number().gte(0).lte(13),
   year: z.number().gte(2000),
 });
@@ -35,7 +37,9 @@ export async function POST(request: Request) {
   if (reading === null) {
     reading = await db.reading.create({
       data: {
-        measure: data.measure,
+        meterLight: data.meterLight,
+        meterWater: data.meterWater,
+        rent: data.rent,
         month: data.month,
         roomId: data.roomId,
         year: data.year,
@@ -47,7 +51,9 @@ export async function POST(request: Request) {
         id: reading.id,
       },
       data: {
-        measure: data.measure,
+        meterLight: data.meterLight,
+        meterWater: data.meterWater,
+        rent: data.rent,
       },
     });
   }

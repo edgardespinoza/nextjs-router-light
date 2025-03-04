@@ -1,6 +1,8 @@
 export type ReadingDto = {
   id: string;
-  measure: number;
+  meterWater: number;
+  meterLight: number;
+  rent: number;
   year: number;
   month: number;
   room: {
@@ -11,20 +13,26 @@ export type ReadingDto = {
 
 export const toReadingDto = ({
   id,
-  measure,
+  meterWater,
+  meterLight,
+  rent,
   year,
   month,
   room,
 }: {
   id: string;
-  measure: number;
+  meterWater: number;
+  meterLight: number;
+  rent: number;
   year: number;
   month: number;
   room: { name: string; id: string };
 }): ReadingDto => {
   return {
     id: id,
-    measure: measure,
+    meterWater: meterWater,
+    meterLight: meterLight,
+    rent: rent,
     year: year,
     month: month,
     room: {

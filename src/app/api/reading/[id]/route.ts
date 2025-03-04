@@ -46,7 +46,9 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
 
 const readingSchema = z.object({
   roomId: z.string().uuid(),
-  measure: z.number().gte(0),
+  meterWater: z.number().gte(0),
+  meterLight: z.number().gte(0),
+  rent: z.number().gte(0),
   month: z.number().gte(0).lte(13),
   year: z.number().gte(2000),
 });
@@ -87,7 +89,9 @@ export async function PUT(
       id: reading.id,
     },
     data: {
-      measure: data.measure,
+      meterWater: data.meterWater,
+      meterLight: data.meterLight,
+      rent: data.rent,
     },
   });
 

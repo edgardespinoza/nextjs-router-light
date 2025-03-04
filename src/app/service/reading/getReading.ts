@@ -5,11 +5,6 @@ export const getReading = async (
   month: number,
   year: number
 ): Promise<ReadingDomain[]> => {
-  if (month <= 0) {
-    month = 12;
-    year = year - 1;
-  }
-
   const reading = await db.reading.findMany({
     where: {
       month: month,
@@ -17,7 +12,7 @@ export const getReading = async (
     },
     include: {
       room: true,
-    }
+    },
   });
 
   return reading.map(toReading);
