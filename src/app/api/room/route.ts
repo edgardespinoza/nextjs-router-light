@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 
 const roomSchema = z.object({
-  name: z.string().length(3),
+  name: z.string().length(5),
 });
 
 export const GET = async () => {

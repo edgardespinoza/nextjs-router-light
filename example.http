@@ -2,7 +2,7 @@
 POST https://nextjs-router-light.vercel.app/api/room
 
 {
-    "name": "602"
+    "name": "TOTAL"
 }
 
 ###
