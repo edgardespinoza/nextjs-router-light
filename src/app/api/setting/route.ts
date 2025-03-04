@@ -4,8 +4,8 @@ import { z } from "zod";
 import { toSettingDto } from "./type";
 
 const settingSchema = z.object({
-  measure: z.number().gte(0),
-  totalPrice: z.number().gte(0),
+  priceWater: z.number().gte(0),
+  priceLight: z.number().gte(0),
 });
 
 export const GET = async () => {
@@ -13,15 +13,10 @@ export const GET = async () => {
 
   let settingDto = null;
 
-  if (setting !== null && setting.totalPrice > 0) {
-    let priceKwh = setting.totalPrice / setting.measure;
-    priceKwh = Number(priceKwh.toFixed(2));
-
-
+  if (setting !== null) {
     settingDto = toSettingDto({
-      measure: setting.measure,
-      priceKwh: priceKwh,
-      totalPrice: setting.totalPrice,
+      priceLight: setting.priceLight,
+      priceWater: setting.priceWater,
     });
   }
 
@@ -46,16 +41,16 @@ export async function POST(request: Request) {
   if (setting === null) {
     setting = await db.setting.create({
       data: {
-        measure: data.measure,
-        totalPrice: data.totalPrice,
+        priceLight: data.priceLight,
+        priceWater: data.priceWater,
       },
     });
   } else {
     setting = await db.setting.update({
       where: { id: setting.id },
       data: {
-        measure: data.measure,
-        totalPrice: data.totalPrice,
+        priceLight: data.priceLight,
+        priceWater: data.priceWater,
       },
     });
   }

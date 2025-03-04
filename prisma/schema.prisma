@@ -47,8 +47,8 @@ model Reading {
 
 model Setting {
   id           String @id @default(uuid())
-  meterWater   Float
-  meterLight   Float
+  priceWater   Float
+  priceLight   Float
 }
 
 

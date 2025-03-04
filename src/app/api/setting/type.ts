@@ -1,21 +1,17 @@
 export type SettingDto = {
-  measure: number;
-  totalPrice: number;
-  priceKwh: number;
+  priceWater: number;
+  priceLight: number;
 };
 
 export const toSettingDto = ({
-  measure,
-  priceKwh,
-  totalPrice
+  priceWater,
+  priceLight,
 }: {
-  measure: number;
-  priceKwh: number;
-  totalPrice: number;
+  priceWater: number;
+  priceLight: number;
 }): SettingDto => {
   return {
-    measure: measure,
-    priceKwh: priceKwh,
-    totalPrice: totalPrice
+    priceWater: priceWater,
+    priceLight: priceLight,
   };
 };
