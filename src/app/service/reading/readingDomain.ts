@@ -11,33 +11,30 @@ export type ReadingDomain = {
   };
 };
 
-export const toReading = ({
-  id,
-  meterWater,
-  meterLight,
-  rent,
-  year,
-  month,
-  room,
-}: {
+type ReadingEntity = {
   id: string;
   meterWater: number;
   meterLight: number;
   rent: number;
   year: number;
   month: number;
-  room: { name: string; id: string };
-}): ReadingDomain => {
+  room: {
+    name: string;
+    id: string;
+  };
+};
+
+export const toReading = (entity: ReadingEntity): ReadingDomain => {
   return {
-    id: id,
-    meterWater: meterWater,
-    meterLight: meterLight,
-    rent: rent,
-    year: year,
-    month: month,
+    id: entity.id,
+    meterWater: entity.meterWater,
+    meterLight: entity.meterLight,
+    rent: entity.rent,
+    year: entity.year,
+    month: entity.month,
     room: {
-      id: room.id,
-      name: room.name,
+      id: entity.room.id,
+      name: entity.room.name,
     },
   };
 };

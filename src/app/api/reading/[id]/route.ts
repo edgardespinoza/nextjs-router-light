@@ -1,6 +1,8 @@
+import { findReadingByRoom } from "@/app/service/reading/getReading";
 import db from "@/db/db";
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { toReadingDto } from "../type";
 
 export async function DELETE(
   _: Request,
@@ -31,6 +33,10 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
   const id = params.id;
   let reading = await db.reading.findUnique({
     where: { id: id },
+
+    include: {
+      room: true,
+    },
   });
 
   if (reading == null) {
@@ -41,7 +47,23 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
       }
     );
   }
-  return NextResponse.json(reading);
+
+  let monthPrevious = reading.month - 1;
+  let yearPrevious = reading.year;
+  if (monthPrevious <= 0) {
+    monthPrevious = 12;
+    yearPrevious = yearPrevious - 1;
+  }
+
+  let readingsPrevious = await findReadingByRoom(
+    monthPrevious,
+    yearPrevious,
+    reading.roomId
+  );
+
+  const result = toReadingDto(reading, readingsPrevious);
+
+  return NextResponse.json(result);
 }
 
 const readingSchema = z.object({

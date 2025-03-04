@@ -1,8 +1,6 @@
-import { getReading } from "@/app/service/reading/getReading";
 import db from "@/db/db";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { z } from "zod";
-import { toReadingDto } from "./type";
 
 const readingSchema = z.object({
   roomId: z.string().uuid(),
@@ -59,28 +57,3 @@ export async function POST(request: Request) {
   }
   return NextResponse.json(reading, { status: 201 });
 }
-
-export const GET = async (request: NextRequest) => {
-  const searchParams = request.nextUrl.searchParams;
-  const month = searchParams.get("month");
-  const year = searchParams.get("year");
-
-  const zValid = z.coerce.number().gte(0);
-
-  const result = zValid.parse(month) && zValid.parse(year);
-
-  if (!result) {
-    return NextResponse.json(
-      { error: "month or year is not number" },
-      {
-        status: 400,
-      }
-    );
-  }
-
-  const reading = await getReading(Number(month), Number(year));
-
-  const readingDto = reading.map(toReadingDto);
-
-  return NextResponse.json(readingDto);
-};
