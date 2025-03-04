@@ -25,12 +25,12 @@ GET https://nextjs-router-light.vercel.app/api/reading/0a6cd673-b610-41e7-bcfb-5
 POST https://nextjs-router-light.vercel.app/api/reading
 
 {
-    "roomId": "d8b70f92-df03-4335-b306-77c084504d2d",
+    "roomId": "efe6310e-8d5c-4b14-8d9b-aaeb46f3582a",
     "meterWater": 100.8,
     "meterLight": 200.8,
     "rent": 300,
     "year": 2024,
-    "month": 5
+    "month": 6
 }
 
 ###
@@ -38,18 +38,16 @@ DELETE https://nextjs-router-light.vercel.app/api/reading/be919445-6163-4b24-b60
 
 ###
 
-PUT https://nextjs-router-light.vercel.app/api/reading/e15f10e2-e8c7-41ed-b979-ae99055942e4
+PUT https://nextjs-router-light.vercel.app/api/reading/0a6cd673-b610-41e7-bcfb-5bda80f4e785
 
 {
-    "roomId": "d8dcb3a5-797b-45d5-8532-c4fda803de30",
-    "measure": 600.8,
+    "roomId": "d8b70f92-df03-4335-b306-77c084504d2d",
+    "meterWater": 400,
+    "meterLight": 200,
+    "rent": 350,
     "year": 2024,
-    "month": 1
+    "month": 6
 }
-
-###
-GET https://nextjs-router-light.vercel.app/api/readings?month=5&year=2024
-
 
 ###
 GET https://nextjs-router-light.vercel.app/api/setting
@@ -58,7 +56,7 @@ GET https://nextjs-router-light.vercel.app/api/setting
 POST https://nextjs-router-light.vercel.app/api/setting
 
 {
-  "measure": 498.7,
-  "totalPrice": 404.8
+  "priceLight": 498.7,
+  "priceWater": 404.8
 }
 
