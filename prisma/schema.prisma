@@ -46,9 +46,9 @@ model Reading {
 }
 
 model Setting {
-  id         String @id @default(uuid())
-  measure    Float
-  totalPrice Float
+  id           String @id @default(uuid())
+  meterWater   Float
+  meterLight   Float
 }
 
 

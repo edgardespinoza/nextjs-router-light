@@ -1,5 +1,5 @@
 
-POST http://localhost:3000/api/room
+POST https://nextjs-router-light.vercel.app/api/room
 
 {
     "name": "602"
@@ -12,14 +12,14 @@ GET https://nextjs-router-light.vercel.app/api/room
 
 ###
 
-DELETE http://localhost:3000/api/room/f88c7434-96c7-47b0-9475-a46519484a51
+DELETE https://nextjs-router-light.vercel.app/api/room/f88c7434-96c7-47b0-9475-a46519484a51
 
 
 ###
-GET http://localhost:3000/api/reading?month=6&year=2024
+GET https://nextjs-router-light.vercel.app/api/reading?month=6&year=2024
 
 ###
-POST http://localhost:3000/api/reading
+POST https://nextjs-router-light.vercel.app/api/reading
 
 {
     "roomId": "d8dcb3a5-797b-45d5-8532-c4fda803de30",
@@ -29,11 +29,11 @@ POST http://localhost:3000/api/reading
 }
 
 ###
-DELETE http://localhost:3000/api/reading/be919445-6163-4b24-b60b-28c6f29b30aa
+DELETE https://nextjs-router-light.vercel.app/api/reading/be919445-6163-4b24-b60b-28c6f29b30aa
 
 ###
 
-PUT http://localhost:3000/api/reading/e15f10e2-e8c7-41ed-b979-ae99055942e4
+PUT https://nextjs-router-light.vercel.app/api/reading/e15f10e2-e8c7-41ed-b979-ae99055942e4
 
 {
     "roomId": "d8dcb3a5-797b-45d5-8532-c4fda803de30",
@@ -47,10 +47,10 @@ GET https://nextjs-router-light.vercel.app/api/readings?month=5&year=2024
 
 
 ###
-GET http://localhost:3000/api/setting
+GET https://nextjs-router-light.vercel.app/api/setting
 
 ###
-POST http://localhost:3000/api/setting
+POST https://nextjs-router-light.vercel.app/api/setting
 
 {
   "measure": 498.7,
