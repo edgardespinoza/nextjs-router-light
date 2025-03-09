@@ -1,5 +1,6 @@
+import { findReadingByRoom } from "@/app/service/reading/getReading";
 import db from "@/db/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 const readingSchema = z.object({
@@ -57,3 +58,33 @@ export async function POST(request: Request) {
   }
   return NextResponse.json(reading, { status: 201 });
 }
+
+export const GET = async (request: NextRequest) => {
+  const searchParams = request.nextUrl.searchParams;
+  const month = searchParams.get("month");
+  const year = searchParams.get("year");
+  const roomId = searchParams.get("roomId");
+
+  const zValid = z.coerce.number().gte(0);
+  const zNotEmpty = z.coerce.string().min(1).uuid();
+
+  const result =
+    zValid.parse(month) && zValid.parse(year) && zNotEmpty.parse(roomId);
+
+  if (!result) {
+    return NextResponse.json(
+      { error: "month or year is not number and roomid not empty" },
+      {
+        status: 400,
+      }
+    );
+  }
+
+  const reading = await findReadingByRoom(
+    Number(month),
+    Number(year),
+    roomId!!
+  );
+
+  return NextResponse.json(reading);
+};
