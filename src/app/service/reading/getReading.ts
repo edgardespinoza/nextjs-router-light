@@ -17,3 +17,24 @@ export const getReading = async (
 
   return reading.map(toReading);
 };
+
+export const getReadingByRoom = async (
+  month: number,
+  year: number,
+  roomId: string
+): Promise<ReadingDomain | null> => {
+  const reading = await db.reading.findFirst({
+    where: {
+      month: month,
+      year: year,
+      roomId: roomId,
+    },
+    include: {
+      room: true,
+    },
+  });
+
+  if (reading == null) return null;
+
+  return toReading(reading);
+};
