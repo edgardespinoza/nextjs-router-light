@@ -18,7 +18,11 @@ export const getReading = async (
   return reading.map(toReading);
 };
 
+<<<<<<< HEAD
 export const findReadingByRoom = async (
+=======
+export const getReadingByRoom = async (
+>>>>>>> 5160ced (chore: add api find reading by room)
   month: number,
   year: number,
   roomId: string
@@ -34,9 +38,13 @@ export const findReadingByRoom = async (
     },
   });
 
+<<<<<<< HEAD
   if (!reading) {
     return null;
   }
+=======
+  if (reading == null) return null;
+>>>>>>> 5160ced (chore: add api find reading by room)
 
   return toReading(reading);
 };
