@@ -3,19 +3,26 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 
 const roomSchema = z.object({
-  name: z.string().length(5),
+  name: z.string().max(5),
 });
 
 export const GET = async () => {
-  const rooms = await db.room.findMany({
-    orderBy: [
-      {
-        name: "asc",
-      },
-    ],
-  });
+  try {
+    const rooms = await db.room.findMany({
+      orderBy: [
+        {
+          name: "asc",
+        },
+      ],
+    });
 
-  return NextResponse.json(rooms);
+    return NextResponse.json(rooms);
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to fetch rooms" },
+      { status: 500 }
+    );
+  }
 };
 
 export async function POST(request: Request) {

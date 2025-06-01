@@ -1,4 +1,4 @@
-import { getReadingByRoom } from "@/app/service/reading/getReading";
+import { findReadingByRoom } from "@/app/service/reading/getReading";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -31,7 +31,7 @@ export const GET = async (
 
   const data = result.data;
 
-  const reading = await getReadingByRoom(data.month, data.year, data.roomId);
+  const reading = await findReadingByRoom(data.month, data.year, data.roomId);
 
   return NextResponse.json(reading ?? {});
 };

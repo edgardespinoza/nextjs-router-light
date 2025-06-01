@@ -1,30 +1,28 @@
 
-POST https://nextjs-router-light.vercel.app/api/room
+POST http://localhost:3000/api/room
 
 {
     "name": "TOTAL"
 }
 
 ###
-
-GET https://nextjs-router-light.vercel.app/api/room
-
+GET http://localhost:3000/api/room
 
 ###
 
-DELETE https://nextjs-router-light.vercel.app/api/room/b4339b8a-9bde-405b-a3f9-84cd4a9e153f
+DELETE http://localhost:3000/api/room/b4339b8a-9bde-405b-a3f9-84cd4a9e153f
 
 ###
-GET https://nextjs-router-light.vercel.app/api/reading/room/d8b70f92-df03-4335-b306-77c084504d2d?month=4&year=2024
+GET http://localhost:3000/api/reading/room/d8b70f92-df03-4335-b306-77c084504d2d?month=4&year=2024
 
 ### readings
-GET https://nextjs-router-light.vercel.app/api/readings?month=6&year=2024
+GET http://localhost:3000/api/readings?month=6&year=2024
 
 ### 
-GET https://nextjs-router-light.vercel.app/api/reading/0a6cd673-b610-41e7-bcfb-5bda80f4e785
+GET http://localhost:3000/api/reading/0a6cd673-b610-41e7-bcfb-5bda80f4e785
 
 ###
-POST https://nextjs-router-light.vercel.app/api/reading
+POST http://localhost:3000/api/reading
 
 {
     "roomId": "efe6310e-8d5c-4b14-8d9b-aaeb46f3582a",
@@ -36,11 +34,11 @@ POST https://nextjs-router-light.vercel.app/api/reading
 }
 
 ###
-DELETE https://nextjs-router-light.vercel.app/api/reading/be919445-6163-4b24-b60b-28c6f29b30aa
+DELETE http://localhost:3000/api/reading/efe6310e-8d5c-4b14-8d9b-aaeb46f3582a
 
 ###
 
-PUT https://nextjs-router-light.vercel.app/api/reading/0a6cd673-b610-41e7-bcfb-5bda80f4e785
+PUT http://localhost:3000/api/reading/0a6cd673-b610-41e7-bcfb-5bda80f4e785
 
 {
     "roomId": "d8b70f92-df03-4335-b306-77c084504d2d",
@@ -52,13 +50,13 @@ PUT https://nextjs-router-light.vercel.app/api/reading/0a6cd673-b610-41e7-bcfb-5
 }
 
 ###
-GET https://nextjs-router-light.vercel.app/api/setting
+GET http://localhost:3000/api/setting
 
 ###
-POST https://nextjs-router-light.vercel.app/api/setting
+POST http://nextjs-router-light.vercel.app/api/setting
 
 {
-  "priceLight": 498.7,
-  "priceWater": 404.8
+  "priceLight": 0.85,
+  "priceWater": 6
 }
 
