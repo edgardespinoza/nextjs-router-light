@@ -15,7 +15,7 @@ GET https://nextjs-router-light.vercel.app/api/room
 DELETE http://localhost:3000/api/room/f88c7434-96c7-47b0-9475-a46519484a51
 
 ###
-GET http://localhost:3000/api/reading/room/d8b70f92-df03-4335-b306-77c084504d2d?month=4&year=2024
+GET https://nextjs-router-light.vercel.app/api/reading/room/d8b70f92-df03-4335-b306-77c084504d2d?month=4&year=2024
 
 ###
 GET http://localhost:3000/api/readings?month=6&year=2024
