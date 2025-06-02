@@ -15,8 +15,8 @@ export const toReadingsDto = (
       id: actual.room.id,
       name: actual.room.name,
     },
-    meterWaterBefore: previous?.meterLight ?? 0,
-    meterLightBefore: previous?.meterWater ?? 0,
+    meterWaterBefore: previous?.meterWater ?? 0,
+    meterLightBefore: previous?.meterLight ?? 0,
     rent: previous?.rent ?? actual.rent,
   };
 };

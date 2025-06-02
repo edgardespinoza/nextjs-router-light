@@ -12,48 +12,55 @@ const readingSchema = z.object({
 });
 
 export async function POST(request: Request): Promise<NextResponse> {
-  const requestValid = await request.json();
+  try {
+    const requestValid = await request.json();
 
-  const result = readingSchema.safeParse(requestValid);
+    const result = readingSchema.safeParse(requestValid);
 
-  if (!result.success) {
-    return NextResponse.json(result.error.formErrors.fieldErrors, {
-      status: 400,
-    });
-  }
+    if (!result.success) {
+      return NextResponse.json(result.error.formErrors.fieldErrors, {
+        status: 400,
+      });
+    }
 
-  const data = result.data;
+    const data = result.data;
 
-  let reading = await db.reading.findFirst({
-    where: {
-      month: data.month,
-      year: data.year,
-      roomId: data.roomId,
-    },
-  });
-
-  if (reading === null) {
-    reading = await db.reading.create({
-      data: {
-        meterLight: data.meterLight,
-        meterWater: data.meterWater,
-        rent: data.rent,
-        month: data.month,
-        roomId: data.roomId,
-        year: data.year,
-      },
-    });
-  } else {
-    reading = await db.reading.update({
+    let reading = await db.reading.findFirst({
       where: {
-        id: reading.id,
-      },
-      data: {
-        meterLight: data.meterLight,
-        meterWater: data.meterWater,
-        rent: data.rent,
+        month: data.month,
+        year: data.year,
+        roomId: data.roomId,
       },
     });
+
+    if (!reading) {
+      reading = await db.reading.create({
+        data: {
+          meterLight: data.meterLight,
+          meterWater: data.meterWater,
+          rent: data.rent,
+          month: data.month,
+          roomId: data.roomId,
+          year: data.year,
+        },
+      });
+    } else {
+      reading = await db.reading.update({
+        where: {
+          id: reading.id,
+        },
+        data: {
+          meterLight: data.meterLight,
+          meterWater: data.meterWater,
+          rent: data.rent,
+        },
+      });
+    }
+    return NextResponse.json(reading, { status: 201 });
+  } catch (error) {
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Server error" },
+      { status: 500 }
+    );
   }
-  return NextResponse.json(reading, { status: 201 });
 }

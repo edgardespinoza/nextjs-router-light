@@ -19,7 +19,7 @@ export const GET = async () => {
     return NextResponse.json(rooms);
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to fetch rooms" },
+      { error: error instanceof Error ? error.message : "Server Error" },
       { status: 500 }
     );
   }

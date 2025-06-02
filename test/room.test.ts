@@ -75,7 +75,7 @@ describe("Room API Routes", () => {
       const data = await response.json();
 
       expect(response.status).toBe(500);
-      expect(data).toEqual({ error: "Failed to fetch rooms" });
+      expect(data).toEqual({ error: "Database error" });
     });
   });
 

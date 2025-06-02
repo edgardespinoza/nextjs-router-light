@@ -32,8 +32,8 @@ export const toReadingDto = (
 ): ReadingDto => {
   return {
     id: current.id,
-    meterWaterCurrent: current.meterLight,
-    meterLightCurrent: current.meterWater,
+    meterWaterCurrent: current.meterWater,
+    meterLightCurrent: current.meterLight,
     meterLightBefore: previous?.meterLight ?? 0,
     meterWaterBefore: previous?.meterWater ?? 0,
     rent: previous?.rent ?? current.rent,

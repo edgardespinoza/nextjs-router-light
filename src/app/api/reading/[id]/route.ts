@@ -8,62 +8,76 @@ export async function DELETE(
   _: Request,
   { params }: { params: { id: string } }
 ) {
-  const id = params.id;
-  let reading = await db.reading.findUnique({
-    where: { id: id },
-  });
+  try {
+    const id = params.id;
+    const existingReading = await db.reading.findUnique({
+      where: { id: id },
+    });
 
-  if (reading == null) {
+    if (!existingReading) {
+      return NextResponse.json(
+        { error: "Reading not found" },
+        {
+          status: 404,
+        }
+      );
+    }
+
+    const reading = await db.reading.delete({
+      where: { id: id },
+    });
+
+    return NextResponse.json(reading);
+  } catch (error) {
     return NextResponse.json(
-      {},
-      {
-        status: 404,
-      }
+      { error: error instanceof Error ? error.message : "Server error" },
+      { status: 500 }
     );
   }
-
-  reading = await db.reading.delete({
-    where: { id: id },
-  });
-
-  return NextResponse.json(reading);
 }
 
 export async function GET(_: Request, { params }: { params: { id: string } }) {
-  const id = params.id;
-  let reading = await db.reading.findUnique({
-    where: { id: id },
+  try {
+    const id = params.id;
+    let reading = await db.reading.findUnique({
+      where: { id: id },
 
-    include: {
-      room: true,
-    },
-  });
+      include: {
+        room: true,
+      },
+    });
 
-  if (reading == null) {
+    if (reading == null) {
+      return NextResponse.json(
+        { error: "Reading not found" },
+        {
+          status: 404,
+        }
+      );
+    }
+
+    let monthPrevious = reading.month - 1;
+    let yearPrevious = reading.year;
+    if (monthPrevious <= 0) {
+      monthPrevious = 12;
+      yearPrevious = yearPrevious - 1;
+    }
+
+    let readingsPrevious = await findReadingByRoom(
+      monthPrevious,
+      yearPrevious,
+      reading.roomId
+    );
+
+    const result = toReadingDto(reading, readingsPrevious);
+
+    return NextResponse.json(result);
+  } catch (error) {
     return NextResponse.json(
-      {},
-      {
-        status: 404,
-      }
+      { error: error instanceof Error ? error.message : "Server Error" },
+      { status: 500 }
     );
   }
-
-  let monthPrevious = reading.month - 1;
-  let yearPrevious = reading.year;
-  if (monthPrevious <= 0) {
-    monthPrevious = 12;
-    yearPrevious = yearPrevious - 1;
-  }
-
-  let readingsPrevious = await findReadingByRoom(
-    monthPrevious,
-    yearPrevious,
-    reading.roomId
-  );
-
-  const result = toReadingDto(reading, readingsPrevious);
-
-  return NextResponse.json(result);
 }
 
 const readingSchema = z.object({
@@ -79,43 +93,45 @@ export async function PUT(
   request: Request,
   { params }: { params: { id: string } }
 ) {
-  const id = params.id;
+  try {
+    const id = params.id;
 
-  const requestValid = await request.json();
+    const requestValid = await request.json();
 
-  const result = readingSchema.safeParse(requestValid);
+    const result = readingSchema.safeParse(requestValid);
 
-  if (!result.success) {
-    return NextResponse.json(result.error.formErrors.fieldErrors, {
-      status: 400,
+    if (!result.success) {
+      return NextResponse.json(result.error.formErrors.fieldErrors, {
+        status: 400,
+      });
+    }
+
+    const existingReading = await db.reading.findUnique({
+      where: { id: id },
     });
-  }
 
-  let reading = await db.reading.findUnique({
-    where: { id: id },
-  });
+    if (!existingReading) {
+      return NextResponse.json({ error: "Reading not found" }, { status: 404 });
+    }
 
-  if (reading == null) {
+    const data = result.data;
+
+    const updatedReading = await db.reading.update({
+      where: {
+        id: id,
+      },
+      data: {
+        meterWater: data.meterWater,
+        meterLight: data.meterLight,
+        rent: data.rent,
+      },
+    });
+
+    return NextResponse.json(updatedReading, { status: 200 });
+  } catch (error) {
     return NextResponse.json(
-      {},
-      {
-        status: 404,
-      }
+      { error: error instanceof Error ? error.message : "Server error" },
+      { status: 500 }
     );
   }
-
-  const data = result.data;
-
-  reading = await db.reading.update({
-    where: {
-      id: reading.id,
-    },
-    data: {
-      meterWater: data.meterWater,
-      meterLight: data.meterLight,
-      rent: data.rent,
-    },
-  });
-
-  return NextResponse.json(reading, { status: 201 });
 }
