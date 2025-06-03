@@ -10,17 +10,17 @@ const schema = z.object({
 
 export const GET = async (
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ): Promise<NextResponse> => {
   const searchParams = request.nextUrl.searchParams;
   const month = searchParams.get("month");
   const year = searchParams.get("year");
-  const roomId = params.id;
+  const { id } = await params;
 
   const result = schema.safeParse({
     month,
     year,
-    roomId,
+    roomId: id,
   });
 
   if (!result.success) {

@@ -122,7 +122,7 @@ describe("Room API Routes", () => {
       mockPrisma.room.delete.mockResolvedValue(roomToDelete);
 
       const response = await DELETE({} as Request, {
-        params: { id: roomToDelete.id },
+        params: Promise.resolve({ id: roomToDelete.id }),
       });
       const data = await response.json();
 
@@ -137,7 +137,7 @@ describe("Room API Routes", () => {
       mockPrisma.room.findUnique.mockResolvedValue(null);
 
       const response = await DELETE({} as Request, {
-        params: { id: "non-existent-id" },
+        params: Promise.resolve({ id: "non-existent-id" }),
       });
 
       expect(response.status).toBe(404);

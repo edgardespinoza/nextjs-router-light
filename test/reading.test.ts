@@ -139,7 +139,7 @@ describe("Readings API Routes", () => {
       mockPrisma.reading.findFirst.mockResolvedValue(mockReading);
 
       const response = await getRoomReading(mockRequest, {
-        params: { id: mockRoom.id },
+        params: Promise.resolve({ id: mockRoom.id }),
       });
       const data = await response.json();
 
@@ -177,7 +177,7 @@ describe("Readings API Routes", () => {
       } as unknown as NextRequest;
 
       const response = await getRoomReading(mockRequest, {
-        params: { id: "invalid-id" }, // Invalid UUID
+        params: Promise.resolve({ id: "invalid-id" }),
       });
       const data = await response.json();
 
@@ -197,7 +197,7 @@ describe("Readings API Routes", () => {
       mockPrisma.reading.findUnique.mockResolvedValue(mockReading);
 
       const response = await getReading(mockRequest, {
-        params: { id: mockReading.id },
+        params: Promise.resolve({ id: mockReading.id }),
       });
       const data = await response.json();
 
@@ -230,7 +230,7 @@ describe("Readings API Routes", () => {
       mockPrisma.reading.findUnique.mockResolvedValue(null);
 
       const response = await getReading(mockRequest, {
-        params: { id: "non-existent-id" },
+        params: Promise.resolve({ id: mockReading.id }),
       });
       const data = await response.json();
 
@@ -248,7 +248,7 @@ describe("Readings API Routes", () => {
       );
 
       const response = await getReading(mockRequest, {
-        params: { id: mockReading.id },
+        params: Promise.resolve({ id: mockReading.id }),
       });
       const data = await response.json();
 
@@ -270,7 +270,7 @@ describe("Readings API Routes", () => {
       mockPrisma.reading.delete.mockResolvedValue(mockReading);
 
       const response = await deleteReading(mockRequest, {
-        params: { id: mockReading.id },
+        params: Promise.resolve({ id: mockReading.id }),
       });
       const data = await response.json();
 
@@ -293,7 +293,7 @@ describe("Readings API Routes", () => {
       // Mock the delete to return the deleted reading
 
       const response = await deleteReading(mockRequest, {
-        params: { id: mockReading.id },
+        params: Promise.resolve({ id: mockReading.id }),
       });
       const data = await response.json();
 
@@ -323,7 +323,7 @@ describe("Readings API Routes", () => {
       mockPrisma.reading.update.mockResolvedValue(updatedReading);
 
       const response = await updateReading(mockRequest, {
-        params: { id: mockReading.id },
+        params: Promise.resolve({ id: mockReading.id }),
       });
       const data = await response.json();
 
@@ -357,7 +357,7 @@ describe("Readings API Routes", () => {
       mockPrisma.reading.update.mockRejectedValue(new Error("Database error"));
 
       const response = await updateReading(mockRequest, {
-        params: { id: mockReading.id },
+        params: Promise.resolve({ id: mockReading.id }),
       });
       const data = await response.json();
 

@@ -1,15 +1,15 @@
 import { findReadingByRoom } from "@/app/service/reading/getReading";
 import db from "@/db/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { toReadingDto } from "../type";
 
 export async function DELETE(
-  _: Request,
-  { params }: { params: { id: string } }
+  _: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = params.id;
+    const { id } = await params;
     const existingReading = await db.reading.findUnique({
       where: { id: id },
     });
@@ -36,9 +36,12 @@ export async function DELETE(
   }
 }
 
-export async function GET(_: Request, { params }: { params: { id: string } }) {
+export async function GET(
+  _: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
-    const id = params.id;
+    const { id } = await params;
     let reading = await db.reading.findUnique({
       where: { id: id },
 
@@ -90,11 +93,11 @@ const readingSchema = z.object({
 });
 
 export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = params.id;
+    const { id } = await params;
 
     const requestValid = await request.json();
 
